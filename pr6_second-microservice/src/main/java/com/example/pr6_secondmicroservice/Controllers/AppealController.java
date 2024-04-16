@@ -59,4 +59,10 @@ public class AppealController {
         List<Appeal> all_appeals = appealRepository.findAll();
         return ResponseEntity.ok().body(all_appeals);
     }
+
+    @GetMapping("/appeals/get_all_by_user_id/{id}")
+    public ResponseEntity<?> GetAllAppealsByUserId(@PathVariable Long id) {
+        List<Appeal> all_appeals_by_user_id = appealRepository.findByUserId(id);
+        return ResponseEntity.ok().body(all_appeals_by_user_id);
+    }
 }

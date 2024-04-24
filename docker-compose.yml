@@ -4,7 +4,7 @@ services:
     container_name: firstms
     image: windflaw8/first_ms
     build:
-      context: /pr6_first-microservice
+      context: ./pr6_first-microservice
       dockerfile: Dockerfile
     ports:
       - 8080:8080
@@ -16,7 +16,7 @@ services:
     container_name: secondms
     image: windflaw8/second_ms
     build:
-      context: /pr6_second-microservice
+      context: ./pr6_second-microservice
       dockerfile: Dockerfile
     ports:
       - 8081:8081

@@ -2,7 +2,7 @@ version: '3.8'
 services:
   firstms:
     container_name: firstms
-    image: first_ms
+    image: windflaw8/first_ms
     build:
       context: C:\Users\Kvali\Downloads\university\Микросервисы\Мои практики\pr6\pr6_first-microservice
       dockerfile: Dockerfile
@@ -14,7 +14,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db/postgres
   secondms:
     container_name: secondms
-    image: second_ms
+    image: windflaw8/second_ms
     build:
       context: C:\Users\Kvali\Downloads\university\Микросервисы\Мои практики\pr6\pr6_second-microservice
       dockerfile: Dockerfile

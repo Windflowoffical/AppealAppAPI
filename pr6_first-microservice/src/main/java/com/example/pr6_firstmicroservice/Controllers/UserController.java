@@ -55,5 +55,4 @@ public class UserController {
         List<User> all_users = userRepository.findAll();
         return ResponseEntity.ok().body(all_users);
     }
-
 }

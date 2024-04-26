@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI-CD
 
 # Controls when the workflow will run
 on:
@@ -50,11 +50,6 @@ jobs:
     steps:
       - name: pulling
         uses: actions/checkout@v3
-        
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-        with:
-              version: v0.7.0
               
       - name: docker-compose build
         run: docker-compose build
@@ -67,5 +62,5 @@ jobs:
           password: ${{ secrets.YC_KEYS }}
           
       - name: pushing
-        run: docker-compose push
+        run: docker-compose push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/valikov-services:latest
       

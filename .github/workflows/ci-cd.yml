@@ -60,7 +60,10 @@ jobs:
           registry: cr.yandex
           username: json_key
           password: ${{ secrets.YC_KEYS }}
-          
+
+      - name: check
+        run: docker image ls
+        
       - name: pushing
-        run: docker-compose push cr.yandex/${{ secrets.YC_REGISTRY_ID }}
+        run: docker-compose push 
       

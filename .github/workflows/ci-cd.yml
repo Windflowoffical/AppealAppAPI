@@ -52,7 +52,7 @@ jobs:
         uses: actions/checkout@v3
               
       - name: docker-compose build
-        run: docker-compose build --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/appeal-app:latest
+        run: docker-compose build --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/firstms .
 
       - name: Login to YC Registry
         uses: docker/login-action@v3.0.0
@@ -62,5 +62,5 @@ jobs:
           password: ${{ secrets.YC_KEYS }}
         
       - name: pushing
-        run: docker-compose push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/appeal-app:latest
+        run: docker-compose push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/firstms:latest
       

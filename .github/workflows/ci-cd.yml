@@ -80,4 +80,3 @@ jobs:
         revision-env:
                       POSTGRES_URL=${{ secrets.POSTGRES_URL }}
         revision-memory: 4GB
-        revision-cpu: 2

@@ -62,5 +62,5 @@ jobs:
           password: ${{ secrets.YC_KEYS }}
           
       - name: pushing
-        run: docker-compose push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/valikov-services:latest
+        run: docker-compose push cr.yandex/${{ secrets.YC_REGISTRY_ID }}
       

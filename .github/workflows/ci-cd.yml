@@ -51,8 +51,8 @@ jobs:
       - name: pulling
         uses: actions/checkout@v3
               
-      - name: docker-compose build
-        run: docker-compose build --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/appeal-app .
+      - name: docker build
+        run: docker build --file ./pr6_first-microservice/Dockerfile -t cr.yandex/${{ secrets.YC_REGISTRY_ID }}/firstms .
 
       - name: Login to YC Registry
         uses: docker/login-action@v3.0.0
@@ -62,5 +62,5 @@ jobs:
           password: ${{ secrets.YC_KEYS }}
         
       - name: pushing
-        run: docker-compose push
+        run: docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/firstms:latest
       

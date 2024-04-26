@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build-and-push-to-dh:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -44,3 +44,28 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: pushing
         run: docker-compose push
+        
+  build-and-push-to-yc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pulling
+        uses: actions/checkout@v3
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+              version: v0.7.0
+              
+      - name: docker-compose build
+        run: docker-compose build
+        
+      - name: Login to YC Registry
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: cr.yandex
+          username: json_key
+          password: ${{ secrets.YC_KEYS }}
+          
+      - name: pushing
+        run: docker-compose push
+      

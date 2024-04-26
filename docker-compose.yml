@@ -11,7 +11,7 @@ services:
     depends_on:
       - secondms
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db/postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://51.250.26.59:5432/appealapp
   secondms:
     container_name: secondms
     image: windflaw8/second_ms
@@ -20,14 +20,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8081:8081
-    depends_on:
-      - db
+    #depends_on:
+      #- db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db/postgres
-  db:
-    image: postgres:14.7-alpine
-    ports:
-      - 5433:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Hellomydearfriend666
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://51.250.26.59:5432/appealapp
+  #db:
+    #image: postgres:14.7-alpine
+    #ports:
+      #- 5433:5432
+    #environment:
+      #POSTGRES_USER: secUREusER
+      #POSTGRES_PASSWORD: StrongEnoughPassword)

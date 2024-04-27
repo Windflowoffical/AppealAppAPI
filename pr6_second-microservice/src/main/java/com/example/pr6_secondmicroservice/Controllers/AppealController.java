@@ -29,6 +29,7 @@ public class AppealController {
                 appealRepository.findById(id).get().getDescription(),
                 appealRepository.findById(id).get().getUser(),
                 appeal.getStatus());
+        appealRepository.save(appealfordb);
         return ResponseEntity.ok().body("Статус заявки успешно обновлён");
     }
 

@@ -1,11 +1,12 @@
 package com.example.pr6_firstmicroservice.Controllers;
 
-import com.example.pr6_firstmicroservice.DTO.Appeal;
+import com.example.pr6_firstmicroservice.DTO.AppealDTO;
 import com.example.pr6_firstmicroservice.Exceptions.BadRequestException;
 import com.example.pr6_firstmicroservice.Models.User;
 import com.example.pr6_firstmicroservice.Repositories.UserRepository;
 import com.example.pr6_firstmicroservice.Services.UserServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +24,8 @@ public class UserController {
     private UserServiceClient userServiceClient;
 
     @PostMapping("/users/create_appeal")
-    public ResponseEntity<String> CreateAppeal(@RequestBody Appeal appeal) {
-        userServiceClient.CreateAppeal(appeal);
+    public ResponseEntity<String> CreateAppeal(@RequestBody AppealDTO appealDTO) {
+        userServiceClient.CreateAppeal(appealDTO);
         return ResponseEntity.ok().body("Всё прошло успешно!");
     }
 
@@ -37,14 +38,14 @@ public class UserController {
         }, () -> {
             userRepository.save(userfordb);
         });
-        return ResponseEntity.ok().body(userfordb);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(userfordb);
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<?> GetUserById(@PathVariable Long id) {
         if(userRepository.findById(id).isPresent()) {
             Optional<User> userfromdb = userRepository.findById(id);
-            return ResponseEntity.ok().body(userfromdb);
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(userfromdb);
         } else {
             return ResponseEntity.ok().body("Пользователя с таким id = " + id + " не существует!");
         }
@@ -53,6 +54,6 @@ public class UserController {
     @GetMapping("/users/get_all")
     public ResponseEntity<?> GetAllUsers() {
         List<User> all_users = userRepository.findAll();
-        return ResponseEntity.ok().body(all_users);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(all_users);
     }
 }

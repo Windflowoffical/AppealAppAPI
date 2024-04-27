@@ -7,6 +7,7 @@ import com.example.pr6_secondmicroservice.Repositories.AppealRepository;
 import com.example.pr6_secondmicroservice.Services.AppealServiceClient;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +48,7 @@ public class AppealController {
     public ResponseEntity<?> GetAppealById(@PathVariable Long id) {
         if(appealRepository.findById(id).isPresent()) {
             Optional<Appeal> appealfromdb = appealRepository.findById(id);
-            return ResponseEntity.ok().body(appealfromdb);
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(appealfromdb);
         } else {
             return ResponseEntity.ok().body("Заявки с таким id = " + id + " не существует!");
         }
@@ -57,12 +58,12 @@ public class AppealController {
     @GetMapping("/appeals/get_all")
     public ResponseEntity<?> GetAllAppeal() {
         List<Appeal> all_appeals = appealRepository.findAll();
-        return ResponseEntity.ok().body(all_appeals);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(all_appeals);
     }
 
     @GetMapping("/appeals/get_all_by_user_id/{id}")
     public ResponseEntity<?> GetAllAppealsByUserId(@PathVariable Long id) {
         List<Appeal> all_appeals_by_user_id = appealRepository.findByUserId(id);
-        return ResponseEntity.ok().body(all_appeals_by_user_id);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(all_appeals_by_user_id);
     }
 }

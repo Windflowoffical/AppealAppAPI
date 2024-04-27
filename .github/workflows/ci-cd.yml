@@ -34,7 +34,7 @@ jobs:
         run: |
           cd pr6_first-microservice
           mvn test
-      - name: Run userService tests
+      - name: Run appealService tests
         run: |
           cd pr6_second-microservice
           mvn test

@@ -28,9 +28,9 @@ jobs:
           cache: 'maven'
           
       - name: Tests userService with Maven
-        run: mvn -f /pr6_first-microservice test
+        run: mvn -f /pr6_first-microservice/pom.xml test
       - name: Tests appealService with Maven
-        run: mvn -f /pr6_second-microservice test
+        run: mvn -f /pr6_second-microservice/pom.xml test
         
   # This workflow contains a single job called "build"
   build-and-push-to-dh:

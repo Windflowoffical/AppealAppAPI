@@ -28,12 +28,12 @@ jobs:
           cache: 'maven'
           
       - name: Build with Maven
-        run: mvn -B ../pr6_first-microservice/ --file pom.xml
+        run: mvn -B /pr6_first-microservice/ --file pom.xml
       - name: Run Tests
         run: mvn test
 
       - name: Build with Maven
-        run: mvn -B ../pr6_second-microservice/ --file pom.xml
+        run: mvn -B /pr6_second-microservice/ --file pom.xml
       - name: Run Tests
         run: mvn test
         

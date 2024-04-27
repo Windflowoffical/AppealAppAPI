@@ -26,8 +26,11 @@ jobs:
           java-version: 21
           distribution: 'temurin'
           cache: 'maven'
-      - name: Tests with Maven
-        run: mvn test
+          
+      - name: Tests userService with Maven
+        run: mvn -f ../pr6_first-microservice test
+      - name: Tests appealService with Maven
+        run: mvn -f ../pr6_second-microservice test
         
   # This workflow contains a single job called "build"
   build-and-push-to-dh:

@@ -27,7 +27,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Tests with Maven
-        run: ./mvnw test
+        run: mvn test
         
   # This workflow contains a single job called "build"
   build-and-push-to-dh:

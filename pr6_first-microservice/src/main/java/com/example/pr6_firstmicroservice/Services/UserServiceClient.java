@@ -14,8 +14,8 @@ public class UserServiceClient {
 
     public UserServiceClient() {
         restClient = RestClient.builder()
-                //.baseUrl("http://secondms:8081/appeals") // for docker
-                .baseUrl("http://localhost:8081/appeals") //for local tests
+                .baseUrl("http://secondms:8081/appeals") // for docker
+                //.baseUrl("http://localhost:8081/appeals") //for local tests
                 .build();
     }
 

@@ -11,7 +11,9 @@ services:
     depends_on:
       - secondms
     environment:
+      - SPRING_APPLICATION_NAME=userservice
       - SPRING_DATASOURCE_URL=jdbc:postgresql://51.250.26.59:5432/appealapp
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
   secondms:
     container_name: secondms
     image: windflaw8/second_ms
@@ -20,11 +22,49 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8081:8081
+    depends_on:
+      - eureka-server
     #depends_on:
       #- db
     environment:
+      - SPRING_APPLICATION_NAME=appealservice
       - SPRING_DATASOURCE_URL=jdbc:postgresql://51.250.26.59:5432/appealapp
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+  eureka-server:
+    container_name: eureka-server
+    hostname: eureka-server
+    image: windflaw8/eureka-server
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    environment:
+      - SPRING_APPLICATION_NAME=eureka-server
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+  api-gateway:
+    container_name: api-gateway
+    image: windflaw8/api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+    depends_on:
+      - firstms
+    environment:
+      - SPRING_APPLICATION_NAME=api_gateway
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+      - SPRING_CLOUD_GATEWAY_ROUTES[0]_URI=http://firstms:8080
+      - SPRING_CLOUD_GATEWAY_ROUTES[0]_ID=users
+      - SPRING_CLOUD_GATEWAY_ROUTES[0]_PREDICATES[0]=Path=/users/**
+      - SPRING_CLOUD_GATEWAY_ROUTES[1]_URI=http://secondms:8081
+      - SPRING_CLOUD_GATEWAY_ROUTES[1]_ID=appeals
+      - SPRING_CLOUD_GATEWAY_ROUTES[1]_PREDICATES[0]=Path=/appeals/**
+
+
   #db:
+    #container_name: db
     #image: postgres:14.7-alpine
     #ports:
       #- 5433:5432

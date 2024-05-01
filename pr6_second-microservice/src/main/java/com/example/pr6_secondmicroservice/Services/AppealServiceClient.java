@@ -14,7 +14,7 @@ public class AppealServiceClient {
 
     public AppealServiceClient() {
         restClient = RestClient.builder()
-                .baseUrl("http://firstms:8080/users") //for docker
+                .baseUrl("http://firstms:8081/users") //for docker
                 //.baseUrl("http://localhost:8080/users") //for local tests
                 .build();
     }

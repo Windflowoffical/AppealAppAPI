@@ -7,7 +7,7 @@ services:
       context: ./pr6_first-microservice
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8081:8081
     depends_on:
       - secondms
     environment:
@@ -21,7 +21,7 @@ services:
       context: ./pr6_second-microservice
       dockerfile: Dockerfile
     ports:
-      - 8081:8081
+      - 8082:8082
     depends_on:
       - eureka-server
     #depends_on:
@@ -48,20 +48,29 @@ services:
     build:
       context: ./api-gateway
       dockerfile: Dockerfile
+    depends_on:
+      - eureka-server
     ports:
       - 9000:9000
-    depends_on:
-      - firstms
     environment:
       - SPRING_APPLICATION_NAME=api_gateway
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI=http://keycloak:8080/realms/spring-microservice-realm
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI=http://keycloak:8080/realms/spring-microservice-realm/protocol/openid-connect/certs
       - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
-      - SPRING_CLOUD_GATEWAY_ROUTES[0]_URI=http://firstms:8080
-      - SPRING_CLOUD_GATEWAY_ROUTES[0]_ID=users
-      - SPRING_CLOUD_GATEWAY_ROUTES[0]_PREDICATES[0]=Path=/users/**
-      - SPRING_CLOUD_GATEWAY_ROUTES[1]_URI=http://secondms:8081
-      - SPRING_CLOUD_GATEWAY_ROUTES[1]_ID=appeals
-      - SPRING_CLOUD_GATEWAY_ROUTES[1]_PREDICATES[0]=Path=/appeals/**
-
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:latest
+    hostname: keycloak
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command: 
+      - start-dev
+      - --import-realm
+    volumes:
+      - ./keycloak-realm/microservice-auth.json:/opt/keycloak/data/import/microservice-auth.json
 
   #db:
     #container_name: db

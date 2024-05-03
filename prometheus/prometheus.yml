@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+
+scrape_configs:
+  - job_name: "eureka-server"
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eureka-server:8761']
+        labels:
+          application: "Eureka server application"
+  - job_name: "api-gateway"
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['api-gateway:9000']
+        labels:
+          application: "API Gateway application"
+  - job_name: "secondms"
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['secondms:8082']
+        labels:
+          application: "Appeal service application"
+  - job_name: "firstms"
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['firstms:8081']
+        labels:
+          application: "User service application"

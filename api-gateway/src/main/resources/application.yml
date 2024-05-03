@@ -35,3 +35,12 @@ logging:
     org.springframework.security: TRACE
 
 
+# Actuator Prometheus Endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
+
+

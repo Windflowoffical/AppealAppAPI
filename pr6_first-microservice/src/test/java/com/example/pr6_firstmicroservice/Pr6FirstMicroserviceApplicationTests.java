@@ -19,7 +19,6 @@ class Pr6FirstMicroserviceApplicationTests {
 	MockMvc mockMvc;
 
 
-
 	@Test
 	void testGetAllUsers() throws Exception {
 		mockMvc.perform(get("/users/get_all"))

@@ -105,5 +105,4 @@ jobs:
         revision-service-account-id: ${{ secrets.YC_SA_ID }}
         revision-env:
                       POSTGRES_URL=${{ secrets.POSTGRES_URL }}
-                      VCAP_APP_PORT=${{ secrets.VCAP_APP_PORT }}
         revision-memory: 4GB

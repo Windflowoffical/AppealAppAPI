@@ -11,6 +11,7 @@ services:
     depends_on:
       - secondms
     environment:
+      - SERVER_PORT=8081
       - SPRING_APPLICATION_NAME=userservice
       - SPRING_DATASOURCE_URL=jdbc:postgresql://51.250.26.59:5432/appealapp
       - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/

@@ -4,7 +4,7 @@ services:
     container_name: firstms
     image: windflaw8/first_ms
     build:
-      context: ./pr6_first-microservice
+      context: ./pr6_first-microservice/dockerfile_for_eureka
       dockerfile: Dockerfile
     ports:
       - 8081:8081

@@ -36,10 +36,10 @@ class AppealControllerTest {
     void testUpdateStatus() {
         //given
         Optional<Appeal> appeal = Optional.ofNullable(Appeal.builder().id(1L).description("Need help!")
-                .user(UserDTO.builder().id(1L).nickname("Windflaw").build())
+                .user(UserDTO.builder().id(1L).email("k.valikov@mail.ru").build())
                 .status(Status.ACCEPTED_FOR_WORK).build());
         Appeal appeal_for_db = Appeal.builder().id(1L).description("Need help!")
-                .user(UserDTO.builder().id(1L).nickname("Windflaw").build())
+                .user(UserDTO.builder().id(1L).email("k.valikov@mail.ru").build())
                 .status(Status.DONE).build();
         Mockito.doReturn(appeal).when(this.appealRepository).findById(1L);
         //when
@@ -70,7 +70,7 @@ class AppealControllerTest {
     void testGetAppealById() {
         //given
         Optional<Appeal> appeal = Optional.ofNullable(Appeal.builder().id(1L).description("Need help!")
-                .user(UserDTO.builder().id(1L).nickname("Windflaw").build())
+                .user(UserDTO.builder().id(1L).email("k.valikov@mail.ru").build())
                 .status(Status.ACCEPTED_FOR_WORK).build());
         Mockito.doReturn(appeal).when(this.appealRepository).findById(1L);
         //when
@@ -88,10 +88,10 @@ class AppealControllerTest {
         //given
         var appeals = List.of(
                 Appeal.builder().id(1L).description("Need help!")
-                        .user(UserDTO.builder().id(1L).nickname("Windflaw").build())
+                        .user(UserDTO.builder().id(1L).email("k.valikov@mail.ru").build())
                         .status(Status.ACCEPTED_FOR_WORK),
                 Appeal.builder().id(2L).description("Помогите, пожалуйста!")
-                        .user(UserDTO.builder().id(2L).nickname("Valikov Kirill").build())
+                        .user(UserDTO.builder().id(2L).email("k.val@mail.ru").build())
                         .status(Status.ACCEPTED_FOR_WORK));
         Mockito.doReturn(appeals).when(this.appealRepository).findAll();
         //when
@@ -110,20 +110,20 @@ class AppealControllerTest {
         //given
         var all_appeals = List.of(
                 Appeal.builder().id(1L).description("Need help!")
-                        .user(UserDTO.builder().id(1L).nickname("Windflaw").build())
+                        .user(UserDTO.builder().id(1L).email("k.valikov@mail.ru").build())
                         .status(Status.ACCEPTED_FOR_WORK),
                 Appeal.builder().id(2L).description("Помогите, пожалуйста!")
-                        .user(UserDTO.builder().id(2L).nickname("Valikov Kirill").build())
+                        .user(UserDTO.builder().id(2L).email("k.val@mail.ru").build())
                         .status(Status.ACCEPTED_FOR_WORK),
                 Appeal.builder().id(3L).description("Нужна срочная помощь!")
-                        .user(UserDTO.builder().id(1L).nickname("Windflaw").build())
+                        .user(UserDTO.builder().id(1L).email("k.valikov@mail.ru").build())
                         .status(Status.ACCEPTED_FOR_WORK));
         var first_user_appeals = List.of(
                 Appeal.builder().id(1L).description("Need help!")
-                        .user(UserDTO.builder().id(1L).nickname("Windflaw").build())
+                        .user(UserDTO.builder().id(1L).email("k.valikov@mail.ru").build())
                         .status(Status.ACCEPTED_FOR_WORK),
                 Appeal.builder().id(3L).description("Нужна срочная помощь!")
-                        .user(UserDTO.builder().id(1L).nickname("Windflaw").build())
+                        .user(UserDTO.builder().id(1L).email("k.valikov@mail.ru").build())
                         .status(Status.ACCEPTED_FOR_WORK));
         Mockito.doReturn(first_user_appeals).when(this.appealRepository).findByUserId(1L);
         //when

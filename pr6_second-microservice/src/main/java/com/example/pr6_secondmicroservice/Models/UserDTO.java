@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 @Table(
         name = "user",
         schema = "public"
@@ -25,7 +24,22 @@ public class UserDTO {
     private Long id;
 
     @Column(nullable = false)
-    private String nickname;
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String sex;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @Column(nullable = false)
+    private String password;
 
     @OneToMany(mappedBy="user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore

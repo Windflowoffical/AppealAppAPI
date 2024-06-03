@@ -49,11 +49,11 @@ class UserControllerTest {
     @Test
     void testCreateUser() {
         //given
-        User user = User.builder().id(1L).nickname("Windflaw").build();
+        User user = User.builder().id(1L).email("k.valikov@mail.ru").build();
         Mockito.doReturn(user).when(this.userRepository).save(user);
         //when
         var responseEntity = this.controller.CreateUser(user);
-        Mockito.verify(this.userRepository).findByNickname(user.getNickname());
+        Mockito.verify(this.userRepository).findByEmail(user.getEmail());
         //then
         assertNotNull(responseEntity);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -64,7 +64,7 @@ class UserControllerTest {
     @Test
     void testGetUserById() {
         //given
-        Optional<User> user = Optional.ofNullable(User.builder().id(1L).nickname("Windflaw").build());
+        Optional<User> user = Optional.ofNullable(User.builder().id(1L).email("k.valikov@mail.ru").build());
         Mockito.doReturn(user).when(this.userRepository).findById(1L);
         //when
         var responseEntity = this.controller.GetUserById(1L);
@@ -79,7 +79,7 @@ class UserControllerTest {
     @Test
     void testGetAllUsers() {
         //given
-        var users = List.of(User.builder().id(1L).nickname("Windflaw"), User.builder().id(2L).nickname("Valikov Kirill"));
+        var users = List.of(User.builder().id(1L).email("k.valikov@mail.ru"), User.builder().id(2L).email("k.val@mail.ru"));
         Mockito.doReturn(users).when(this.userRepository).findAll();
         //when
         var responseEntity = this.controller.GetAllUsers();

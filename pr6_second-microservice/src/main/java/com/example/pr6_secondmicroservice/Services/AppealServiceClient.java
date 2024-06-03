@@ -14,8 +14,8 @@ public class AppealServiceClient {
 
     public AppealServiceClient() {
         restClient = RestClient.builder()
-                .baseUrl("http://firstms:8081/users") //for docker, 8081 cause env SERVER_PORT = 8081 in docker-compose
-                //.baseUrl("http://localhost:8081/users") //for local tests, 8081 cause env SERVER_PORT = 8081 in docker-compose
+                //.baseUrl("http://firstms:8081/users") //for docker, 8081 cause env SERVER_PORT = 8081 in docker-compose
+                .baseUrl("http://localhost:8081/users") //for local tests, 8081 cause env SERVER_PORT = 8081 in docker-compose
                 .build();
     }
 

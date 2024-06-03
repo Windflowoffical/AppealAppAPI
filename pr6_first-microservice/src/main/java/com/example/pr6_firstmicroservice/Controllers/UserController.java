@@ -32,13 +32,26 @@ public class UserController {
 
     @PostMapping("/users/create")
     public ResponseEntity<?> CreateUser(@RequestBody User userfordb) {
-        userRepository.findByNickname(userfordb.getNickname()).ifPresentOrElse(user -> {
-            throw new BadRequestException(String.format("Пользователь с таким никнеймом '%s' уже существует!",
-                    userfordb.getNickname()));
+        userRepository.findByEmail(userfordb.getEmail()).ifPresentOrElse(user -> {
+            throw new BadRequestException(String.format("Пользователь с таким email '%s' уже существует!",
+                    userfordb.getEmail()));
         }, () -> {
             userRepository.save(userfordb);
         });
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(userfordb);
+    }
+
+    @PostMapping("/users/login")
+    public ResponseEntity<?> login(@RequestBody User userfordb)
+    {
+        userRepository.findByEmailAndPassword(userfordb.getEmail(), userfordb.getPassword()).
+                ifPresentOrElse((user) -> {
+                    System.out.println("Пользователь успешно авторизован!");
+                }, () -> {
+                    throw new BadRequestException(String.format("Пользователя с такими данными не существует: %s, %s",
+                            userfordb.getEmail(), userfordb.getPassword()));
+                });
+        return ResponseEntity.ok().body(userRepository.findByEmailAndPassword(userfordb.getEmail(), userfordb.getPassword()));
     }
 
     @GetMapping("/users/{id}")
@@ -56,4 +69,5 @@ public class UserController {
         List<User> all_users = userRepository.findAll();
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(all_users);
     }
+
 }

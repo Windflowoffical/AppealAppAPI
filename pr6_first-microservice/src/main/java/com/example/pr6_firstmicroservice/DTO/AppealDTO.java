@@ -10,6 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 public class AppealDTO {
 
+    private String title;
+
     private String description;
 
     private User user;

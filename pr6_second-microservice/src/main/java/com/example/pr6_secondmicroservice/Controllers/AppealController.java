@@ -25,7 +25,7 @@ public class AppealController {
 
     @PutMapping("appeals/{id}")
     public ResponseEntity<?> UpdateStatus (@PathVariable Long id, @RequestBody Appeal appeal) {
-        Appeal appealfordb = new Appeal(appealRepository.findById(id).get().getId(),
+        Appeal appealfordb = new Appeal(appealRepository.findById(id).get().getId(), appealRepository.findById(id).get().getTitle(),
                 appealRepository.findById(id).get().getDescription(),
                 appealRepository.findById(id).get().getUser(),
                 appeal.getStatus());

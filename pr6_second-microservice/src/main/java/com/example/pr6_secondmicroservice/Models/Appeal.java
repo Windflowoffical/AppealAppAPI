@@ -1,7 +1,6 @@
 package com.example.pr6_secondmicroservice.Models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 

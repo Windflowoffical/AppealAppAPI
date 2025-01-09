@@ -5,7 +5,6 @@ import com.example.pr6_secondmicroservice.Models.Status;
 import com.example.pr6_secondmicroservice.Models.UserDTO;
 import com.example.pr6_secondmicroservice.Repositories.AppealRepository;
 import com.example.pr6_secondmicroservice.Services.AppealServiceClient;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

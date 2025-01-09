@@ -4,7 +4,7 @@ import com.example.pr6_secondmicroservice.Models.UserDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.util.List;
+
 
 @Service
 public class AppealServiceClient {
